@@ -58,17 +58,15 @@ searchField.addEventListener('keypress', async (event) => {
 
             const div = document.createElement('div');
             div.innerHTML = `
-            <div class="card w-96 bg-base-100 shadow-xl">
+            <div class="card w-auto bg-base-100 shadow-xl">
             <figure><img class="h-60 w-auto p-4" src="${image}" alt="Shoes" /></figure>
-            <div class="card-body">
-              <h2 class="card-title capitalize">${category}</h2>
-              <p>${title.length > 20 ? title.slice(0, 30) + "..." : title}</p>
-              <h2 class="text-cyan-600">$ ${price}</h2></br>
-              <div class="card-actions justify-end">
-               
-                <p class="btn bg-teal-400 border-none">View Details</p>
-              </div>
-            </div>
+                <div class="card-body">
+                    <h2 class="card-title capitalize">${category}</h2>
+                    <p>${title.length > 20 ? title.slice(0, 30) + "..." : title}</p>
+                    <h2 class="text-cyan-600">$ ${price}</h2></br>
+                    <div class="card-actions justify-end">                
+                    <p class="btn bg-teal-400 border-none">View Details</p>
+                    </div>               
           </div>`;
             productsContainer.appendChild(div);
 
