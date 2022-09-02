@@ -31,12 +31,19 @@ setAllMenu()
 const searchField = document.getElementById('search-field');
 
 searchField.addEventListener('keypress', async (event) => {
+
+    const spinner = document.getElementById('spinner')
+    spinner.classList.remove("hidden");
+
+
     // console.log(event.key);
     if (event.key === 'Enter') {
         // console.log(searchField.value);
         const searchValue = searchField.value;
         // console.log(searchValue);
         const allProducts = await loadAllProducts();
+        spinner.classList.add("hidden");
+
         // console.log(allProducts);
         const foundProducts = allProducts.filter(product => product.category.includes(searchValue))
         // console.log(foundProducts);
@@ -54,7 +61,7 @@ searchField.addEventListener('keypress', async (event) => {
         foundProducts.forEach(product => {
             console.log(product);
 
-            const { category, image, price, title } = product;
+            const { category, image, price, title, description } = product;
 
             const div = document.createElement('div');
             div.innerHTML = `
@@ -65,7 +72,8 @@ searchField.addEventListener('keypress', async (event) => {
                     <p>${title.length > 20 ? title.slice(0, 30) + "..." : title}</p>
                     <h2 class="text-cyan-600">$ ${price}</h2></br>
                     <div class="card-actions justify-end">                
-                    <p class="btn bg-teal-400 border-none">View Details</p>
+                    <label for="my-modal-3" onclick="showModal('${description}','${image}')" class="w-full btn bg-teal-400 border-none modal-button">View Details</label>
+                    
                     </div>               
           </div>`;
             productsContainer.appendChild(div);
@@ -74,3 +82,11 @@ searchField.addEventListener('keypress', async (event) => {
     }
 })
 
+const showModal = (description, image) => {
+    const modalBody = document.getElementById('modal-body');
+    modalBody.textContent = "";
+    modalBody.innerHTML = `
+<img src=${image}>
+    <p class="py-4">${description}</p>
+`
+}
